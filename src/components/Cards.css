@@ -1,0 +1,28 @@
+.card-component {
+    height: 250px;
+    width: 300px;
+    border: 1px solid;
+    margin: 10px;
+}
+
+.card-item-img {
+    height: 180px;
+    width: 280px;
+    margin: 10px;
+}
+
+.card-bottom-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-price-tag{
+    margin: 10px;
+}
+
+.card-cart-btn {
+    color: white;
+    background-color: black;
+    margin: 10px;
+}
