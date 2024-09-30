@@ -1,7 +1,7 @@
 .header-component {
   display: flex;
   flex-direction: row;
-  height: 50px;
+  height: 60px;
   background-color: #e6e6e6;
   justify-content: space-between;
 }
@@ -28,10 +28,4 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
-
-.header-cart-btn {
-  width: 50px;
-  height: 40px;
-  height: fit-content;
 }

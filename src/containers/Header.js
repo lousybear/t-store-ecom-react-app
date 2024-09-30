@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import CartIcon from "../components/CartIcon";
 
 export default function Header() {
   return (
@@ -7,7 +8,7 @@ export default function Header() {
       <div className="header-title">TeeRex Store</div>
       <div className="header-end">
         <div className="header-product-btn">Products</div>
-        <button className="header-cart-btn">Cart</button>
+        <CartIcon count={5} />
       </div>
     </div>
   );
