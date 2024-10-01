@@ -4,6 +4,7 @@ import Cards from "../components/Cards";
 import { url } from "../constants/endpoints";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import SearchIcon from "../components/SearchIcon";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -27,7 +28,9 @@ export default function Home() {
       <Header />
       <div className="home-search-bar">
         <input type="text" placeholder="Search for products..." />
-        <button className="home-seacrh-btn">Search</button>
+        {/* <button className="home-seacrh-btn">Search</button> */}
+
+        <SearchIcon />
       </div>
       <div className="home-main-container">
         {data && data.length > 0 && <Sidebar data={data} />}

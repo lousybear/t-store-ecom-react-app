@@ -9,6 +9,7 @@ export default function CartIcon({ count }) {
         width: "28px",
         height: "28px",
         cursor: "pointer",
+        margin: "10px",
       }}
     >
       <svg

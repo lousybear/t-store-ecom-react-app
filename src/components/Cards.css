@@ -1,11 +1,12 @@
 .card-component {
-  height: 270px;
+  height: 300px;
   width: 300px;
   border: 0px;
   margin: 10px;
   display: flex;
   flex-direction: column;
   padding: 20px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
 .card-item-img {
@@ -17,21 +18,27 @@
 .card-item-name {
   font-size: 16px;
   font-weight: 500;
-  align-items: flex-start;
+  margin: 0 10px 10px;
+  align-self: flex-start;
 }
 
 .card-bottom-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0 10px 0 10px;
 }
 
 .card-price-tag {
-  margin: 10px;
+  align-self: center;
 }
 
 .card-cart-btn {
   color: white;
   background-color: black;
-  margin: 10px;
+  height: 30px;
+  width: 100px;
+  border: 0px;
+  border-radius: 5px;
+  cursor: pointer;
 }
