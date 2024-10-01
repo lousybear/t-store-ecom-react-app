@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CartIcon({ count }) {
+export default function CartIcon({ count, onCartClick }) {
   return (
     <div
       style={{
@@ -11,6 +11,7 @@ export default function CartIcon({ count }) {
         cursor: "pointer",
         margin: "10px",
       }}
+      onClick={() => onCartClick()}
     >
       <svg
         version="1.1"

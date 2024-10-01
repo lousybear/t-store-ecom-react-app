@@ -1,4 +1,6 @@
 import React from "react";
+import "./CartItem.css";
+import Dropdown from "./Dropdown";
 
 export default function CartItem({
   productName,
@@ -9,12 +11,12 @@ export default function CartItem({
   return (
     <div className="cart-item-container">
       <img className="cart-item-img" src={imgUrl} alt="" />
-      <div>
-        <p>{productName}</p>
-        <p>{productPrice}</p>
+      <div className="cart-item-prod-details">
+        <p id="productName">{productName}</p>
+        <p id="productPrice">Rs {productPrice}</p>
       </div>
-      <input type="number" name="quantity" value={quantity} />
-      <button>Delete</button>
+      <Dropdown selectedQty={quantity} availableQty={quantity} />
+      <button className="cart-delete-btn">Delete</button>
     </div>
   );
 }
