@@ -28,6 +28,7 @@ export default function CartItem({
       </div>
       <Dropdown
         id={id}
+        key={id}
         quantity={quantity}
         availableQty={availableQty}
         updateQuantity={handleQtyChange}

@@ -10,6 +10,7 @@ import { ShoppingCartContext } from "../contexts/ShoppingCartContext";
 
 export default function Home() {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { totalCount } = useContext(ShoppingCartContext);
 
@@ -22,31 +23,34 @@ export default function Home() {
       const response = await fetch(url);
       const result = await response.json();
       setData(result);
+      setFilteredData(result);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const toggleCart = () => {
+  const handleCartClick = () => {
     setIsCartOpen(!isCartOpen);
   };
 
   return (
     <div className="home-layout">
-      <Header cartCount={totalCount} onCartClick={toggleCart} />
+      <Header cartCount={totalCount} handleCartClick={handleCartClick} />
       {isCartOpen ? (
         <ShoppingCart />
       ) : (
         <>
           <div className="home-search-bar">
             <input type="text" placeholder="Search for products..." />
-            <SearchIcon />
+            <SearchIcon className="search-button-container" />
           </div>
           <div className="home-main-container">
-            {data && data.length > 0 && <Sidebar data={data} />}
+            {data && data.length > 0 && (
+              <Sidebar data={data} setFilteredData={setFilteredData} />
+            )}
             <div className="home-card-container">
-              {data && data.length > 0 ? (
-                data.map((product) => {
+              {filteredData && filteredData.length > 0 ? (
+                filteredData.map((product) => {
                   const { id, imageURL, price, name, quantity } = product;
                   return (
                     <Products

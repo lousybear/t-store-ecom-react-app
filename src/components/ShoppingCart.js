@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
+import "./ShoppingCart.css";
 import CartItem from "./CartItem";
 import { ShoppingCartContext } from "../contexts/ShoppingCartContext";
 
 export default function ShoppingCart() {
-  const { cartItems, deleteItem, changeItemQuantity } =
+  const { cartItems, deleteItem, changeItemQuantity, totalAmt } =
     useContext(ShoppingCartContext);
   return (
     <div className="shopping-cart-container">
@@ -27,6 +28,8 @@ export default function ShoppingCart() {
       ) : (
         <div>Cart is empty!</div>
       )}
+      <hr style={{ width: "100vw" }} />
+      <div className="shopping-cart-total-amt">Total amount: {totalAmt}</div>
     </div>
   );
 }

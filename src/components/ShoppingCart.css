@@ -1,0 +1,7 @@
+.shopping-cart-container {
+  display: flex;
+  flex-direction: column;
+}
+.shopping-cart-total-amt {
+  font-weight: 500;
+}

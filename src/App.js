@@ -40,6 +40,11 @@ function App() {
     0
   );
 
+  const totalAmt = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
   return (
     <div className="App">
       <ShoppingCartContext.Provider
@@ -47,6 +52,7 @@ function App() {
           cartItems,
           addToCart,
           totalCount,
+          totalAmt,
           deleteItem,
           changeItemQuantity,
         }}
