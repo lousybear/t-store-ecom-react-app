@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
-import Cards from "../components/Cards";
+import Products from "../components/Products";
 import { url } from "../constants/endpoints";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import SearchIcon from "../components/SearchIcon";
 import ShoppingCart from "../components/ShoppingCart";
+import { ShoppingCartContext } from "../contexts/ShoppingCartContext";
 
 export default function Home() {
   const [data, setData] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const { totalCount } = useContext(ShoppingCartContext);
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   const fetchData = async () => {
     try {
       const response = await fetch(url);
       const result = await response.json();
       setData(result);
-      setCartItems([data[0]]);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -33,9 +33,9 @@ export default function Home() {
 
   return (
     <div className="home-layout">
-      <Header cartCount={cartItems.length} onCartClick={toggleCart} />
+      <Header cartCount={totalCount} onCartClick={toggleCart} />
       {isCartOpen ? (
-        <ShoppingCart items={cartItems} />
+        <ShoppingCart />
       ) : (
         <>
           <div className="home-search-bar">
@@ -46,14 +46,16 @@ export default function Home() {
             {data && data.length > 0 && <Sidebar data={data} />}
             <div className="home-card-container">
               {data && data.length > 0 ? (
-                data.map((card) => {
-                  const { imageURL, price, name } = card;
+                data.map((product) => {
+                  const { id, imageURL, price, name, quantity } = product;
                   return (
-                    <Cards
-                      key={card.id}
+                    <Products
+                      key={id}
+                      id={id}
                       imageURL={imageURL}
                       price={price}
                       name={name}
+                      availableQty={quantity}
                     />
                   );
                 })

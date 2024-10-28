@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import "./Dropdown.css";
 
-export default function Dropdown({ selectedQty, availableQty }) {
-  const [selectedValue, setSelectedValue] = useState(selectedQty);
+export default function Dropdown({
+  id,
+  quantity,
+  availableQty,
+  updateQuantity,
+}) {
+  const [selectedQty, setSelectedQty] = useState(quantity);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -12,14 +17,15 @@ export default function Dropdown({ selectedQty, availableQty }) {
   const qtyArr = Array.from({ length: availableQty }, (_, index) => index + 1);
 
   const handleSelect = (item) => {
-    setSelectedValue(item);
     setIsOpen(false);
+    setSelectedQty(item);
+    updateQuantity(id, item);
   };
 
   return (
     <div className="dropdown-container">
       <div className="dropdown-btn" onClick={toggleDropdown}>
-        Qty: {selectedValue}
+        Qty: {selectedQty}
       </div>
       {isOpen && (
         <ul className="dropdown-list">
