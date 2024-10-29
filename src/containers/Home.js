@@ -4,14 +4,13 @@ import Products from "../components/Products";
 import { url } from "../constants/endpoints";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import SearchIcon from "../components/SearchIcon";
 import ShoppingCart from "../components/ShoppingCart";
 import { ShoppingCartContext } from "../contexts/ShoppingCartContext";
+import Search from "../components/Search";
 
 export default function Home() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const { totalCount } = useContext(ShoppingCartContext);
 
   useEffect(() => {
@@ -29,21 +28,22 @@ export default function Home() {
     }
   };
 
-  const handleCartClick = () => {
-    setIsCartOpen(!isCartOpen);
-  };
+  // const handleCartClick = () => {
+  //   setIsCartOpen(!isCartOpen);
+  // };
+  const isCartPage = window.location.pathname === "/cart";
 
   return (
     <div className="home-layout">
-      <Header cartCount={totalCount} handleCartClick={handleCartClick} />
-      {isCartOpen ? (
+      <Header cartCount={totalCount} />
+      {isCartPage ? (
         <ShoppingCart />
       ) : (
         <>
-          <div className="home-search-bar">
-            <input type="text" placeholder="Search for products..." />
-            <SearchIcon className="search-button-container" />
-          </div>
+          <Search
+            filteredData={filteredData}
+            setFilteredData={setFilteredData}
+          />
           <div className="home-main-container">
             {data && data.length > 0 && (
               <Sidebar data={data} setFilteredData={setFilteredData} />

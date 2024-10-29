@@ -14,15 +14,21 @@ export default function Filters({ data, setFilteredData }) {
     () => [...new Set(data.map((item) => item.type))],
     [data]
   );
-  const prices = useMemo(
-    () => [0, ...new Set(data.map((item) => item.price).sort((a, b) => a - b))],
-    [data]
+
+  const priceRanges = useMemo(
+    () => [
+      { min: 0, max: 250, label: "0 - Rs250" },
+      { min: 251, max: 450, label: "Rs251 - Rs450" },
+      { min: 450, max: 1000, label: "Rs 450" },
+    ],
+    []
   );
 
   const [selectedFilters, setSelectedFilters] = useState({
     colors: [],
     genders: [],
     types: [],
+    priceRanges: [],
   });
 
   const handleFilterChange = (filterType, value) => {
@@ -38,15 +44,24 @@ export default function Filters({ data, setFilteredData }) {
     let filteredData = data;
 
     Object.entries(selectedFilters).forEach(([key, values]) => {
-      if (values.length) {
+      if (values.length && key !== "priceRanges") {
         filteredData = filteredData.filter((item) =>
           values.includes(item[key.slice(0, -1)])
         );
       }
     });
 
+    if (selectedFilters.priceRanges.length > 0) {
+      filteredData = filteredData.filter((item) => {
+        return selectedFilters.priceRanges.some((rangeIndex) => {
+          const range = priceRanges[rangeIndex];
+          return item.price >= range.min && item.price <= range.max;
+        });
+      });
+    }
+
     setFilteredData(filteredData);
-  }, [selectedFilters, data, setFilteredData]);
+  }, [selectedFilters, data, setFilteredData, priceRanges]);
 
   return (
     <div className="filter-component">
@@ -82,10 +97,15 @@ export default function Filters({ data, setFilteredData }) {
 
       <div className="filter-item">
         <p className="filter-label">Price:</p>
-        {prices.map((price, index) => (
-          <label key={price}>
-            <input type="checkbox" value={price} />
-            Rs {price} {prices[index + 1] && `- Rs ${prices[index + 1]}`}
+        {priceRanges.map((range, index) => (
+          <label key={range.label}>
+            <input
+              type="checkbox"
+              value={index}
+              checked={selectedFilters.priceRanges.includes(index)}
+              onChange={() => handleFilterChange("priceRanges", index)}
+            />
+            {range.label}
           </label>
         ))}
       </div>

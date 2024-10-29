@@ -37,7 +37,11 @@ export default function Products({ id, price, imageURL, name, availableQty }) {
             className="card-cart-btn"
             disabled={disableAddToCartBtn}
           >
-            {!disableAddToCartBtn ? "Add to cart" : "Max quantity"}
+            {!disableAddToCartBtn
+              ? "Add to cart"
+              : availableQty
+              ? "Max Quantity Selected"
+              : "Out of Stock"}
           </button>
         </div>
       </div>

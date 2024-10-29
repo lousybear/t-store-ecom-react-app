@@ -11,7 +11,7 @@ export default function CartIcon({ count, onCartClick }) {
         cursor: "pointer",
         margin: "10px",
       }}
-      onClick={() => onCartClick()}
+      onClick={onCartClick}
     >
       <svg
         version="1.1"

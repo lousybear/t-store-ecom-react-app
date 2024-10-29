@@ -1,8 +1,9 @@
 import React from "react";
 
-export default function SearchIcon() {
+export default function SearchIcon({ onClick }) {
   return (
     <div
+      onClick={onClick}
       style={{
         width: "70px",
         height: "46 px",
